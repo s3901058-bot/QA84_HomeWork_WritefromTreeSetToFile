@@ -4,7 +4,7 @@ import java.util.TreeSet;
 
 public class MainFolderFile {
     public static void main(String[] args) {
-        TreeSet<String> read = new TreeSet<>();
+//        TreeSet<String> read = new TreeSet<>();
         TreeSet<String> fruits = new TreeSet<>();
         fillFruitstToFile(fruits);
 
