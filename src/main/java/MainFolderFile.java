@@ -4,6 +4,7 @@ import java.util.TreeSet;
 
 public class MainFolderFile {
     public static void main(String[] args) {
+        TreeSet<String> read = new TreeSet<>();
         TreeSet<String> fruits = new TreeSet<>();
         fillFruitstToFile(fruits);
 
@@ -12,9 +13,15 @@ public class MainFolderFile {
         String FilePath = FolderPath +File.separator+"Fruits.txt";
         addFruitstToFile(fruits,FolderPath,FilePath);
         System.out.println("Fruits: "+fruits);
+//        ReadFromFile(read);
+
 
 
     }
+
+//    private static void ReadFromFile(TreeSet<String> read) {
+//
+//    }
 
 
     private static void addFruitstToFile(TreeSet<String> fruits, String folderPath, String filePath) {
@@ -22,12 +29,23 @@ public class MainFolderFile {
          if (!folder.exists()) {
              folder.mkdir();
          }
+        if (folder.exists() && folder.isDirectory() && folder.canWrite()) {
+        }
          File fl=new File(filePath);
          if (!fl.exists()) {
+            try {
+                fl.createNewFile();
+
+            }   catch (IOException e) {
+                 System.out.println(e.getMessage());
+             }
+         }
+          if (fl.exists() && fl.isFile() && fl.canWrite()) {
+             FileWriter fw= null;
              try {
-                 fl.createNewFile();
-                 FileWriter fw=new FileWriter(fl);
-                 BufferedWriter bw=new BufferedWriter(fw);
+                 fw = new FileWriter(fl,true);
+
+             BufferedWriter bw=new BufferedWriter(fw);
                  for(String fruit:fruits){
                      bw.write("\nYour Favourite fruits:  "+fruit);
                      bw.newLine();
@@ -37,9 +55,10 @@ public class MainFolderFile {
              } catch (IOException e)
              {
                  System.out.println(e.getMessage());
-             }
-         }
 
+             }
+
+    }
     }
 
     private static void fillFruitstToFile(TreeSet<String> fruits) {
